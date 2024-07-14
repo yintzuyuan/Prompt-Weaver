@@ -21,18 +21,18 @@ const PromptGenerator = () => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
   const structureAreaRef = useRef(null);
-  
+
   const handleMouseEnter = (content, event) => {
-  setTooltipContent(content);
-  setTooltipPosition({ x: event.clientX, y: event.clientY });
-  setIsTooltipVisible(true);
+    setTooltipContent(content);
+    setTooltipPosition({ x: event.clientX, y: event.clientY });
+    setIsTooltipVisible(true);
   };
 
   const handleMouseLeave = () => {
     setIsTooltipVisible(false);
   };
 
-  const handleMouseMove = (event) => {
+  const handleMouseMove = event => {
     setTooltipPosition({ x: event.clientX, y: event.clientY });
   };
 
@@ -43,13 +43,13 @@ const PromptGenerator = () => {
     }
   }, []);
 
-  const handleElementClick = (element) => {
+  const handleElementClick = element => {
     setSelectedElement(element);
     setSelectedVariable(element.variables ? element.variables[0] : null);
     setIsBlock2Collapsed(true);
-    setIsBlock3Collapsed(false);  // 當選擇元素時，展開區塊3
+    setIsBlock3Collapsed(false); // 當選擇元素時，展開區塊3
   };
-  
+
   const elements = {
     basicInstruction: {
       name: '任務目標',
@@ -60,10 +60,10 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '執行動作', value: '' },
-        { name: '達成目標', value: '' }
-      ]
-    },
+      { name: '執行動作', value: '' },
+      { name: '達成目標', value: '' }] },
+
+
     roleSettings: {
       name: '角色扮演',
       category: '任務定義',
@@ -73,9 +73,9 @@ const PromptGenerator = () => {
       reusable: false,
       editType: 'longText',
       variables: [
-        { name: '角色描述', value: '' }
-      ]
-    },
+      { name: '角色描述', value: '' }] },
+
+
     taskSteps: {
       name: '步驟列舉',
       category: '任務定義',
@@ -85,11 +85,11 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '步驟1', value: '' },
-        { name: '步驟2', value: '' },
-        { name: '步驟3', value: '' }
-      ]
-    },
+      { name: '步驟1', value: '' },
+      { name: '步驟2', value: '' },
+      { name: '步驟3', value: '' }] },
+
+
     referenceData: {
       name: '資料引用',
       category: '內容輸入',
@@ -99,9 +99,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '參考內容', value: '' }
-      ]
-    },
+      { name: '參考內容', value: '' }] },
+
+
     exampleExplanation: {
       name: '舉例說明',
       category: '內容輸入',
@@ -111,9 +111,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '範例內容', value: '' }
-      ]
-    },
+      { name: '範例內容', value: '' }] },
+
+
     backgroundInfo: {
       name: '背景資訊',
       category: '內容輸入',
@@ -123,9 +123,9 @@ const PromptGenerator = () => {
       reusable: false,
       editType: 'longText',
       variables: [
-        { name: '背景描述', value: '' }
-      ]
-    },
+      { name: '背景描述', value: '' }] },
+
+
     thinkingProcess: {
       name: '思考過程',
       category: '思考控制',
@@ -134,8 +134,8 @@ const PromptGenerator = () => {
       content: '請在回答前，先在<thinking>標籤內詳細說明你的思考過程。',
       reusable: false,
       editType: 'checkbox',
-      isIncluded: false
-    },
+      isIncluded: false },
+
     multiAngleAnalysis: {
       name: '多角度分析',
       category: '思考控制',
@@ -145,10 +145,10 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '角度1', value: '' },
-        { name: '角度2', value: '' }
-      ]
-    },
+      { name: '角度1', value: '' },
+      { name: '角度2', value: '' }] },
+
+
     hypotheticalScenario: {
       name: '假設情境',
       category: '思考控制',
@@ -158,9 +158,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '特定情境', value: '' }
-      ]
-    },
+      { name: '特定情境', value: '' }] },
+
+
     clearDecision: {
       name: '明確抉擇',
       category: '思考控制',
@@ -170,9 +170,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '決策類型', value: '' }
-      ]
-    },
+      { name: '決策類型', value: '' }] },
+
+
     formatSpecification: {
       name: '格式指定',
       category: '輸出控制',
@@ -185,9 +185,9 @@ const PromptGenerator = () => {
       selectedOption: '',
       customOption: '',
       variables: [
-        { name: '指定格式', value: '' }
-      ]
-    },
+      { name: '指定格式', value: '' }] },
+
+
     responseLimit: {
       name: '回答篇幅限制',
       category: '輸出控制',
@@ -200,9 +200,9 @@ const PromptGenerator = () => {
       selectedOption: '',
       customOption: '',
       variables: [
-        { name: '字數/段落數', value: '' }
-      ]
-    },
+      { name: '字數/段落數', value: '' }] },
+
+
     keySummary: {
       name: '重點總結',
       category: '輸出控制',
@@ -211,8 +211,8 @@ const PromptGenerator = () => {
       content: '在回答結束時，請用一段簡短的文字總結主要觀點。',
       reusable: false,
       editType: 'checkbox',
-      isIncluded: false
-    },
+      isIncluded: false },
+
     outputStyle: {
       name: '輸出風格',
       category: '輸出控制',
@@ -223,15 +223,15 @@ const PromptGenerator = () => {
       editType: 'mixed',
       options: {
         風格描述: ['正式', '隨意', '專業', '幽默', '自訂義'],
-        是否包含問候語: ['包含簡短的問候語', '直接進入主題，不需要問候語']
-      },
+        是否包含問候語: ['包含簡短的問候語', '直接進入主題，不需要問候語'] },
+
       selectedOption: '',
       customOption: '',
       variables: [
-        { name: '風格描述', value: '', customValue: '' },
-        { name: '是否包含問候語', value: '' }
-      ]
-    },
+      { name: '風格描述', value: '', customValue: '' },
+      { name: '是否包含問候語', value: '' }] },
+
+
     timeSensitive: {
       name: '時間背景設定',
       category: '自訂義',
@@ -241,9 +241,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '時間點/時期', value: '' }
-      ]
-    },
+      { name: '時間點/時期', value: '' }] },
+
+
     contrastAnalysis: {
       name: '比較分析',
       category: '自訂義',
@@ -253,10 +253,10 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '主題1', value: '' },
-        { name: '主題2', value: '' }
-      ]
-    },
+      { name: '主題1', value: '' },
+      { name: '主題2', value: '' }] },
+
+
     creativeSpark: {
       name: '創意思考',
       category: '自訂義',
@@ -266,9 +266,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '非常規情境', value: '' }
-      ]
-    },
+      { name: '非常規情境', value: '' }] },
+
+
     ethicalConsideration: {
       name: '倫理考量',
       category: '自訂義',
@@ -278,9 +278,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '特定倫理問題', value: '' }
-      ]
-    },
+      { name: '特定倫理問題', value: '' }] },
+
+
     dataAnalysis: {
       name: '數據分析',
       category: '自訂義',
@@ -290,9 +290,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '數據描述', value: '' }
-      ]
-    },
+      { name: '數據描述', value: '' }] },
+
+
     multilingual: {
       name: '多語言回覆',
       category: '自訂義',
@@ -305,10 +305,10 @@ const PromptGenerator = () => {
       selectedOption: '',
       customOption: '',
       variables: [
-        { name: '語言1', value: '', customValue: '' },
-        { name: '語言2', value: '', customValue: '' }
-      ]
-    },
+      { name: '語言1', value: '', customValue: '' },
+      { name: '語言2', value: '', customValue: '' }] },
+
+
     technicalTerms: {
       name: '專業術語',
       category: '自訂義',
@@ -318,9 +318,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '專業領域', value: '' }
-      ]
-    },
+      { name: '專業領域', value: '' }] },
+
+
     counterfactualThinking: {
       name: '反事實思考',
       category: '自訂義',
@@ -330,9 +330,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '某個事實或條件', value: '' }
-      ]
-    },
+      { name: '某個事實或條件', value: '' }] },
+
+
     factCheck: {
       name: '事實核查',
       category: '思考控制',
@@ -342,8 +342,8 @@ const PromptGenerator = () => {
       content: '在回答之前，請仔細查證所有相關事實。如果發現任何不確定或有爭議的信息，請在回答中明確指出。',
       reusable: false,
       editType: 'checkbox',
-      isIncluded: false
-    },
+      isIncluded: false },
+
     adjustPoints: {
       name: '重點修正列表',
       category: '輸出控制',
@@ -354,11 +354,11 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '問題1', value: '' },
-        { name: '問題2', value: '' },
-        { name: '問題3', value: '' }
-      ]
-    },
+      { name: '問題1', value: '' },
+      { name: '問題2', value: '' },
+      { name: '問題3', value: '' }] },
+
+
     problemRestate: {
       name: '問題重述對照',
       category: '任務定義',
@@ -369,10 +369,10 @@ const PromptGenerator = () => {
       reusable: false,
       editType: 'longText',
       variables: [
-        { name: '修改前', value: '' },
-        { name: '修改後', value: '' }
-      ]
-    },
+      { name: '修改前', value: '' },
+      { name: '修改後', value: '' }] },
+
+
     continueGeneration: {
       name: '內容延續',
       category: '輸出控制',
@@ -382,8 +382,8 @@ const PromptGenerator = () => {
       content: '請基於之前的內容繼續生成，保持一致的風格和主題。',
       reusable: true,
       editType: 'checkbox',
-      isIncluded: false
-    },
+      isIncluded: false },
+
     attachmentReference: {
       name: '🔗 附件參考',
       category: '內容輸入',
@@ -394,9 +394,9 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '調整項目', value: '' }
-      ]
-    },
+      { name: '調整項目', value: '' }] },
+
+
     focusEditInstruction: {
       name: '修改聚焦',
       category: '輸出控制',
@@ -406,48 +406,48 @@ const PromptGenerator = () => {
       reusable: true,
       editType: 'longText',
       variables: [
-        { name: '內容類型', value: '' }
-      ]
-    }
-  };
+      { name: '內容類型', value: '' }] } };
+
+
+
 
   const elementSections = [
-    {
-      title: "任務定義",
-      icon: "📋",
-      elements: ['basicInstruction', 'roleSettings', 'taskSteps', 'problemRestate']
-    },
-    {
-      title: "內容輸入",
-      icon: "📝",
-      elements: ['referenceData', 'exampleExplanation', 'backgroundInfo', 'attachmentReference']
-    },
-    {
-      title: "思考控制",
-      icon: "🧠",
-      elements: ['thinkingProcess', 'multiAngleAnalysis', 'hypotheticalScenario', 'clearDecision', 'factCheck']
-    },
-    {
-      title: "輸出控制",
-      icon: "📤",
-      elements: ['formatSpecification', 'responseLimit', 'keySummary', 'outputStyle', 'focusEditInstruction']
-    },
-    {
-      title: "自訂義",
-      icon: "🛠️",
-      elements: [
-        'timeSensitive',
-        'contrastAnalysis',
-        'creativeSpark',
-        'ethicalConsideration',
-        'dataAnalysis',
-        'multilingual',
-        'technicalTerms',
-        'counterfactualThinking'
-      ]
-    }
-  ];
-  
+  {
+    title: "任務定義",
+    icon: "📋",
+    elements: ['basicInstruction', 'roleSettings', 'taskSteps', 'problemRestate'] },
+
+  {
+    title: "內容輸入",
+    icon: "📝",
+    elements: ['referenceData', 'exampleExplanation', 'backgroundInfo', 'attachmentReference'] },
+
+  {
+    title: "思考控制",
+    icon: "🧠",
+    elements: ['thinkingProcess', 'multiAngleAnalysis', 'hypotheticalScenario', 'clearDecision', 'factCheck'] },
+
+  {
+    title: "輸出控制",
+    icon: "📤",
+    elements: ['formatSpecification', 'responseLimit', 'keySummary', 'outputStyle', 'focusEditInstruction'] },
+
+  {
+    title: "自訂義",
+    icon: "🛠️",
+    elements: [
+    'timeSensitive',
+    'contrastAnalysis',
+    'creativeSpark',
+    'ethicalConsideration',
+    'dataAnalysis',
+    'multilingual',
+    'technicalTerms',
+    'counterfactualThinking'] }];
+
+
+
+
   const adjustButtonWidths = () => {
     const buttons = document.querySelectorAll('.structure-element');
     buttons.forEach(button => {
@@ -459,8 +459,8 @@ const PromptGenerator = () => {
       button.style.width = `${newWidth}px`;
     });
   };
-  
-  
+
+
   const adjustElementWidths = () => {
     if (structureAreaRef.current) {
       const elements = structureAreaRef.current.querySelectorAll('.structure-element');
@@ -481,8 +481,8 @@ const PromptGenerator = () => {
       });
     }
   };
-  
-    // 新增的 useEffect，用於監聽容器大小變化
+
+  // 新增的 useEffect，用於監聽容器大小變化
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       adjustButtonWidths();
@@ -503,13 +503,13 @@ const PromptGenerator = () => {
   useEffect(() => {
     adjustButtonWidths();
   }, [structure]);
-  
+
   useEffect(() => {
     adjustElementWidths();
     window.addEventListener('resize', adjustElementWidths);
     return () => window.removeEventListener('resize', adjustElementWidths);
   }, [structure]);
-  
+
   useEffect(() => {
     setStructure([elements.basicInstruction]);
   }, []);
@@ -521,7 +521,7 @@ const PromptGenerator = () => {
         element.variables.forEach(variable => {
           const regex = new RegExp(`{{${variable.name}}}`, 'g');
           let replacementValue = variable.value;
-          if (element.editType === 'dynamicSelect' || (element.editType === 'mixed' && element.options[variable.name].includes('自訂義'))) {
+          if (element.editType === 'dynamicSelect' || element.editType === 'mixed' && element.options[variable.name].includes('自訂義')) {
             replacementValue = variable.value === '自訂義' ? variable.customValue : variable.value;
           }
           content = content.replace(regex, replacementValue || `{{${variable.name}}}`);
@@ -537,39 +537,39 @@ const PromptGenerator = () => {
     const finalContent = `\\\n${prompt}\n\\`;
     setFinalPrompt(finalContent);
   }, [structure]);
-  
-// 初始化結構
-useEffect(() => {
-  if (structure.length === 0) {
-    setStructure([{ ...elements.basicInstruction, id: Date.now() }]);
-  }
-}, []);
 
-// 生成最終提示詞
-useEffect(() => {
-  const promptContent = structure.map(element => {
-    let content = element.content;
-    if (element.variables) {
-      element.variables.forEach(variable => {
-        const regex = new RegExp(`{{${variable.name}}}`, 'g');
-        let replacementValue = variable.value;
-        if (element.editType === 'dynamicSelect' || (element.editType === 'mixed' && element.options[variable.name].includes('自訂義'))) {
-          replacementValue = variable.value === '自訂義' ? variable.customValue : variable.value;
-        }
-        content = content.replace(regex, replacementValue || `{{${variable.name}}}`);
-      });
+  // 初始化結構
+  useEffect(() => {
+    if (structure.length === 0) {
+      setStructure([{ ...elements.basicInstruction, id: Date.now() }]);
     }
+  }, []);
 
-    if (element.tags && element.tags.length > 0) {
-      const tag = element.tags[0]; // 使用第一個標籤
-      return `<${tag}>\n${content}\n</${tag}>`;
-    }
-    return content;
-  }).join('\n\n');
-  
-  setFinalPrompt(promptContent);
-}, [structure]);
-  
+  // 生成最終提示詞
+  useEffect(() => {
+    const promptContent = structure.map(element => {
+      let content = element.content;
+      if (element.variables) {
+        element.variables.forEach(variable => {
+          const regex = new RegExp(`{{${variable.name}}}`, 'g');
+          let replacementValue = variable.value;
+          if (element.editType === 'dynamicSelect' || element.editType === 'mixed' && element.options[variable.name].includes('自訂義')) {
+            replacementValue = variable.value === '自訂義' ? variable.customValue : variable.value;
+          }
+          content = content.replace(regex, replacementValue || `{{${variable.name}}}`);
+        });
+      }
+
+      if (element.tags && element.tags.length > 0) {
+        const tag = element.tags[0]; // 使用第一個標籤
+        return `<${tag}>\n${content}\n</${tag}>`;
+      }
+      return content;
+    }).join('\n\n');
+
+    setFinalPrompt(promptContent);
+  }, [structure]);
+
   const addElement = element => {
     if (!element.reusable && structure.some(e => e.name === element.name)) {
       return;
@@ -580,20 +580,20 @@ useEffect(() => {
       id: Date.now(),
       variables: element.variables ? element.variables.map(v => ({ ...v, value: '' })) : [],
       selectedOption: '',
-      isIncluded: element.editType === 'checkbox' ? false : undefined
-    };
+      isIncluded: element.editType === 'checkbox' ? false : undefined };
+
 
     setStructure(prevStructure => [...prevStructure, newElement]);
   };
 
-  const removeElement = (index) => {
+  const removeElement = index => {
     const newStructure = structure.filter((_, i) => i !== index);
     setStructure(newStructure);
-    
+
     if (selectedElement === structure[index]) {
       setSelectedElement(null);
       setSelectedVariable(null);
-      setIsBlock3Collapsed(true);  // 當移除選中的元素時，收起區塊3
+      setIsBlock3Collapsed(true); // 當移除選中的元素時，收起區塊3
     }
     // 如果結構被清空，展開區塊2
     if (newStructure.length === 0) {
@@ -611,14 +611,14 @@ useEffect(() => {
   };
 
   // 新增的輔助函數
-  const updateElementContent = (element) => {
+  const updateElementContent = element => {
     const contentTemplate = {
       '步驟列舉': '請按以下步驟執行任務：\n',
       '多角度分析': '請從以下角度分析這個問題：\n',
       '比較分析': '請比較以下主題的異同，並分析各自的優缺點：\n',
       '多語言回覆': '請用以下語言回答這個問題：\n',
-      '重點修正列表': '請根據以下要點調整你的回答：\n'
-    };
+      '重點修正列表': '請根據以下要點調整你的回答：\n' };
+
 
     if (contentTemplate[element.name]) {
       return contentTemplate[element.name] + element.variables.map((v, index) => `${index + 1}. {{${v.name}}}`).join('\n');
@@ -626,7 +626,7 @@ useEffect(() => {
     return element.content;
   };
 
-  const addOption = (elementId) => {
+  const addOption = elementId => {
     setStructure(prevStructure => {
       const newStructure = prevStructure.map(element => {
         if (element.id === elementId) {
@@ -649,8 +649,8 @@ useEffect(() => {
               newVariableName = `問題${newOptionNumber}`;
               break;
             default:
-              newVariableName = `選項${newOptionNumber}`;
-          }
+              newVariableName = `選項${newOptionNumber}`;}
+
           const newVariable = { name: newVariableName, value: '' };
           const newVariables = [...element.variables, newVariable];
           const newContent = updateElementContent({ ...element, variables: newVariables });
@@ -669,7 +669,7 @@ useEffect(() => {
     });
   };
 
-  const removeOption = (elementId) => {
+  const removeOption = elementId => {
     setStructure(prevStructure => {
       const newStructure = prevStructure.map(element => {
         if (element.id === elementId && element.variables.length > 1) {
@@ -697,12 +697,12 @@ useEffect(() => {
         if (element.id === elementId) {
           const newVariables = element.variables.map(v => {
             if (v.name === variableName) {
-              if (element.editType === 'select' || element.editType === 'dynamicSelect' || (element.editType === 'mixed' && element.options[variableName].includes('自訂義'))) {
+              if (element.editType === 'select' || element.editType === 'dynamicSelect' || element.editType === 'mixed' && element.options[variableName].includes('自訂義')) {
                 return {
                   ...v,
                   value: isCustom ? '自訂義' : value,
-                  customValue: isCustom ? value : v.customValue
-                };
+                  customValue: isCustom ? value : v.customValue };
+
               } else {
                 return { ...v, value };
               }
@@ -724,7 +724,7 @@ useEffect(() => {
       return newStructure;
     });
   };
-  
+
   const generateContent = (elementName, variables) => {
     switch (elementName) {
       case '步驟列舉':
@@ -734,65 +734,65 @@ useEffect(() => {
       case '重點修正列表':
         return `${elementName}：\n${variables.map((v, index) => `${index + 1}. {{${v.name}}}`).join('\n')}`;
       default:
-        return variables.map((v) => `{{${v.name}}}`).join('\n');
-    }
+        return variables.map(v => `{{${v.name}}}`).join('\n');}
+
   };
 
   const copyToClipboard = () => {
     if (navigator.clipboard && window.isSecureContext) {
       // 對於支援 Clipboard API 的現代瀏覽器
-      navigator.clipboard.writeText(finalPrompt)
-        .then(() => {
-          setCopyStatus('已複製！');
-          setTimeout(() => setCopyStatus('複製到剪貼簿'), 2000);  // 2秒後重置狀態
-        })
-        .catch((err) => {
-          console.error('無法複製文字: ', err);
-          fallbackCopyTextToClipboard(finalPrompt);
-        });
+      navigator.clipboard.writeText(finalPrompt).
+      then(() => {
+        setCopyStatus('已複製！');
+        setTimeout(() => setCopyStatus('複製到剪貼簿'), 2000); // 2秒後重置狀態
+      }).
+      catch(err => {
+        console.error('無法複製文字: ', err);
+        fallbackCopyTextToClipboard(finalPrompt);
+      });
     } else {
       // 不支援 Clipboard API 的瀏覽器使用備用方法
       fallbackCopyTextToClipboard(finalPrompt);
     }
   };
 
-const fallbackCopyTextToClipboard = (text) => {
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  
-  // 避免滾動到底部
-  textArea.style.top = "0";
-  textArea.style.left = "0";
-  textArea.style.position = "fixed";
+  const fallbackCopyTextToClipboard = text => {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
 
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
+    // 避免滾動到底部
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
 
-  try {
-    const successful = document.execCommand('copy');
-    if (successful) {
-      setCopyStatus('已複製！');
-      setTimeout(() => setCopyStatus('複製到剪貼簿'), 2000);
-    } else {
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        setCopyStatus('已複製！');
+        setTimeout(() => setCopyStatus('複製到剪貼簿'), 2000);
+      } else {
+        setCopyStatus('複製失敗');
+        setTimeout(() => setCopyStatus('複製到剪貼簿'), 2000);
+      }
+    } catch (err) {
+      console.error('無法複製文字: ', err);
       setCopyStatus('複製失敗');
       setTimeout(() => setCopyStatus('複製到剪貼簿'), 2000);
     }
-  } catch (err) {
-    console.error('無法複製文字: ', err);
-    setCopyStatus('複製失敗');
-    setTimeout(() => setCopyStatus('複製到剪貼簿'), 2000);
-  }
 
-  document.body.removeChild(textArea);
-};
-  
+    document.body.removeChild(textArea);
+  };
+
   const resetToDefault = () => {
     setStructure([elements.basicInstruction]);
     setSelectedElement(null);
     setSelectedVariable(null);
     setIsBlock2Collapsed(false);
-    setIsBlock3Collapsed(true);  // 當移除選中的元素時，收起區塊3
+    setIsBlock3Collapsed(true); // 當移除選中的元素時，收起區塊3
   };
 
   const handleDragStart = (e, index) => {
@@ -818,38 +818,38 @@ const fallbackCopyTextToClipboard = (text) => {
     setDraggedElement(null);
   };
 
-  const getCategoryClass = (category) => {
-    switch(category) {
-      case '任務定義': return 'task-definition';
-      case '內容輸入': return 'content-input';
-      case '思考控制': return 'thought-control';
-      case '輸出控制': return 'output-control';
-      case '自訂義': return 'custom';
-      default: return '';
-    }
+  const getCategoryClass = category => {
+    switch (category) {
+      case '任務定義':return 'task-definition';
+      case '內容輸入':return 'content-input';
+      case '思考控制':return 'thought-control';
+      case '輸出控制':return 'output-control';
+      case '自訂義':return 'custom';
+      default:return '';}
+
   };
 
   // 工具提示組件
   const Tooltip = ({ children, text }) => {
-    return (
-      <div className="tooltip">
-        {children}
-        <span className="tooltiptext">{text}</span>
-      </div>
-    );
+    return /*#__PURE__*/(
+      React.createElement("div", { className: "tooltip" },
+      children, /*#__PURE__*/
+      React.createElement("span", { className: "tooltiptext" }, text)));
+
+
   };
-  
+
   // checkbox按鈕類型
   const renderElementButton = (element, sectionTitle) => {
     const elementCount = structure.filter(e => e.name === element.name).length;
     const isSelected = elementCount > 0;
     const isDisabled = !element.reusable && isSelected;
 
-    return (
-      <button
-        key={element.name}
-        className={`${getCategoryClass(sectionTitle)}`}
-        onClick={() => {
+    return /*#__PURE__*/(
+      React.createElement("button", {
+        key: element.name,
+        className: `${getCategoryClass(sectionTitle)}`,
+        onClick: () => {
           if (element.editType === 'checkbox') {
             if (isSelected) {
               setStructure(structure.filter(e => e.name !== element.name));
@@ -859,24 +859,24 @@ const fallbackCopyTextToClipboard = (text) => {
           } else if (element.reusable || !isSelected) {
             addElement(element);
           }
-        }}
-        disabled={isDisabled}
-        onMouseEnter={(e) => handleMouseEnter(element.description || '點擊添加此元素', e)}
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={handleMouseMove}
-      >
-        <div className="element-content" title={element.name}>
-          {element.name}
-        </div>
-        {isSelected && (
-          element.reusable ? 
-          <span className="element-count">{elementCount}</span> : 
-          <span className="selected-mark">✓</span>
-        )}
-      </button>
-    );
+        },
+        disabled: isDisabled,
+        onMouseEnter: e => handleMouseEnter(element.description || '點擊添加此元素', e),
+        onMouseLeave: handleMouseLeave,
+        onMouseMove: handleMouseMove }, /*#__PURE__*/
+
+      React.createElement("div", { className: "element-content", title: element.name },
+      element.name),
+
+      isSelected && (
+      element.reusable ? /*#__PURE__*/
+      React.createElement("span", { className: "element-count" }, elementCount) : /*#__PURE__*/
+      React.createElement("span", { className: "selected-mark" }, "\u2713"))));
+
+
+
   };
-  
+
   const getTruncatedFirstLine = (content, maxLength = 30) => {
     const firstLine = content.split('\n')[0].trim();
     if (firstLine.length <= maxLength) {
@@ -884,236 +884,236 @@ const fallbackCopyTextToClipboard = (text) => {
     }
     return firstLine.substring(0, maxLength - 3) + '...';
   };
-  
-  return (
-    <div className="prompt-generator">
-      {/* 區塊1: Prompt架構編輯區 */}
-      <div className="card">
-        <h2 className="section-title">架構編輯區</h2>
-        <div className="structure-area" ref={structureAreaRef}>
-          {structure.map((element, index) => (
-            <div
-              key={element.id}
-              className={`structure-element ${getCategoryClass(element.category)}`}
-              draggable
-              onDragStart={(e) => handleDragStart(e, index)}
-              onDragOver={(e) => handleDragOver(e, index)}
-              onDragEnd={handleDragEnd}
-            >
-              <button 
-                className="element-button structure-button"
-                onClick={() => handleElementClick(element)}
-              >
-                <span className="button-text">{element.name}</span>
-                <span 
-                  className="remove-button" 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeElement(index);
-                  }}
-                  aria-label="移除元素"
-                >
-                  ×
-                </span>
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {/* 區塊2: Element放置區 */}
-      <div className={`card ${isBlock2Collapsed ? 'collapsed' : ''}`}>
-        <h2 
-          className={`section-title ${isBlock2Collapsed ? 'collapsed' : ''}`}
-          onClick={() => setIsBlock2Collapsed(!isBlock2Collapsed)}
-        >
-          元素放置區
-          <span className="arrow">{isBlock2Collapsed ? '▼' : '▼'}</span>
-        </h2>
-        <div className="element-placement-area">
-          <div className="element-grid">
-            {elementSections.map((section, sectionIndex) => (
-              <div key={sectionIndex} className="element-section">
-                <h3 className="subsection-title">
-                  <span className="section-icon">{section.icon}</span>
-                  {section.title}
-                </h3>
-                <div className="element-buttons">
-                  {section.elements.map((elementKey) => {
-                    const element = elements[elementKey];
-                    return renderElementButton(element, section.title);
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      
-      {/* 區塊3: 變數內容填寫區 */}
-      <div className={`card ${isBlock3Collapsed ? 'collapsed' : ''}`}>
-        <h2 
-          className="section-title" 
-          onClick={() => setIsBlock3Collapsed(!isBlock3Collapsed)}
-        >
-          變數內容填寫區
-          <span className="arrow">{isBlock3Collapsed ? '▶' : '▼'}</span>
-        </h2>
-        <div className="variable-content-area">
-          {selectedElement ? (
-            <div className="variable-editor">
-              <h3 className="element-content-title">
-                {getTruncatedFirstLine(selectedElement.content)}
-              </h3>
-                  {selectedElement.editType === 'select' && (
-                  <div className="variable-item">
-                  {/*<label>{selectedElement.variables[0].name}:</label>*/}
-                    <select
-                      value={selectedElement.variables[0].value}
-                      onChange={(e) => updateVariable(selectedElement.id, selectedElement.variables[0].name, e.target.value)}
-                    >
-                      <option value="">選擇一個選項</option>
-                      {selectedElement.options.map((option, optionIndex) => (
-                        <option key={optionIndex} value={option}>{option}</option>
-                      ))}
-                    </select>
-                    {selectedElement.variables[0].value === '自訂義' && (
-                      <input
-                        type="text"
-                        value={selectedElement.variables[0].customValue || ''}
-                        onChange={(e) => updateVariable(selectedElement.id, selectedElement.variables[0].name, e.target.value, true)}
-                        placeholder="請輸入自訂選項"
-                      />
-                    )}
-                  </div>
-                )}
-              {selectedElement.editType === 'dynamicSelect' && (
-                selectedElement.variables.map((variable, index) => (
-                  <div key={index} className="variable-item">
-                    {/*<label>{variable.name}:</label>*/}
-                    <select
-                      value={variable.value}
-                      onChange={(e) => updateVariable(selectedElement.id, variable.name, e.target.value)}
-                    >
-                      <option value="">選擇一個選項</option>
-                      {selectedElement.options.map((option, optionIndex) => (
-                        <option key={optionIndex} value={option}>{option}</option>
-                      ))}
-                    </select>
-                    {variable.value === '自訂義' && (
-                      <input
-                        type="text"
-                        value={variable.customValue || ''}
-                        onChange={(e) => updateVariable(selectedElement.id, variable.name, e.target.value, true)}
-                        placeholder="請輸入自訂選項"
-                      />
-                    )}
-                  </div>
-                ))
-              )}
-              {selectedElement.editType === 'mixed' && (
-                selectedElement.variables.map((variable, index) => (
-                  <div key={index} className="variable-item">
-                    {/*<label>{variable.name}:</label>*/}
-                    <select
-                      value={variable.value}
-                      onChange={(e) => updateVariable(selectedElement.id, variable.name, e.target.value)}
-                    >
-                      <option value="">選擇一個選項</option>
-                      {selectedElement.options[variable.name].map((option, optionIndex) => (
-                        <option key={optionIndex} value={option}>{option}</option>
-                      ))}
-                    </select>
-                    {selectedElement.options[variable.name].includes('自訂義') && variable.value === '自訂義' && (
-                      <input
-                        type="text"
-                        value={variable.customValue || ''}
-                        onChange={(e) => updateVariable(selectedElement.id, variable.name, e.target.value, true)}
-                        placeholder="請輸入自訂選項"
-                      />
-                    )}
-                  </div>
-                ))
-              )}
-              {selectedElement.editType === 'longText' && (
-                selectedElement.variables.map((variable, index) => (
-                  <div key={index} className="variable-item">
-                    {/*<label>{variable.name}:</label>*/}
-                    <textarea
-                      value={variable.value || ''}
-                      onChange={(e) => updateVariable(selectedElement.id, variable.name, e.target.value)}
-                      placeholder={`請輸入${variable.name}`}
-                    />
-                  </div>
-                ))
-              )}
-              {['步驟列舉', '多角度分析', '比較分析', '多語言回覆', '重點修正列表'].includes(selectedElement.name) && (
-                <div className="option-buttons">
-                    <button onClick={() => addOption(selectedElement.id)}>➕</button>
-                    <button
-                      onClick={() => removeOption(selectedElement.id)}
-                      disabled={selectedElement.variables.length <= 1}
-                    >➖</button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <p className="no-element-selected">請在架構編輯區選擇一個元素來編輯其變數</p>
-          )}
-        </div>
-      </div>
+  return /*#__PURE__*/(
+    React.createElement("div", { className: "prompt-generator" }, /*#__PURE__*/
 
-      {/* 區塊4: 最終輸出的提示展示區 */}
-      <div className="card final-prompt-area">
-        <h2 className="section-title">最終提示詞輸出</h2>
-        <textarea
-          value={finalPrompt}
-          readOnly
-          className="final-prompt"
-        />
-        <div className="button-container">
-            <button 
-              onClick={copyToClipboard}
-              className={copyStatus === '已複製！' ? 'success' : copyStatus === '複製失敗' ? 'error' : ''}
-            >
-              {copyStatus}
-            </button>
-            <button onClick={resetToDefault} className="secondary">
-              回到預設值
-            </button>
-        </div>
-      </div>
-      {isTooltipVisible && (
-      <div
-        className="custom-tooltip"
-          style={{
-            position: 'fixed',
-            left: `${tooltipPosition.x + 10}px`,
-            top: `${tooltipPosition.y + 10}px`,
-            zIndex: 9999,
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            color: 'white',
-            padding: '5px 10px',
-            borderRadius: '4px',
-            fontSize: '12px',
-            pointerEvents: 'none'
-          }}
-        >
-          {tooltipContent}
-        </div>
-      )}
+    React.createElement("div", { className: "card" }, /*#__PURE__*/
+    React.createElement("h2", { className: "section-title" }, "\u67B6\u69CB\u7DE8\u8F2F\u5340"), /*#__PURE__*/
+    React.createElement("div", { className: "structure-area", ref: structureAreaRef },
+    structure.map((element, index) => /*#__PURE__*/
+    React.createElement("div", {
+      key: element.id,
+      className: `structure-element ${getCategoryClass(element.category)}`,
+      draggable: true,
+      onDragStart: e => handleDragStart(e, index),
+      onDragOver: e => handleDragOver(e, index),
+      onDragEnd: handleDragEnd }, /*#__PURE__*/
 
-      {/* Footer */}
-      <footer className="app-footer">
-        <div className="footer-content">
-          <p>&copy; 2024 <a href="https://erikyin.net/" target="_blank">殷慈遠的字碼世界</a>. All rights reserved.</p>
-          <p>參考資訊：<a href="https://docs.anthropic.com/zh-TW/docs/prompt-engineering" target="_blank">提示工程 - Anthropic</a></p>
-          <p>♥ Love it? ★ <a href="https://erikyin.net/boost/" target="_blank">Support me!</a>
-</p>
-        </div>
-      </footer>
-    </div>
-  );
+    React.createElement("button", {
+      className: "element-button structure-button",
+      onClick: () => handleElementClick(element) }, /*#__PURE__*/
+
+    React.createElement("span", { className: "button-text" }, element.name), /*#__PURE__*/
+    React.createElement("span", {
+      className: "remove-button",
+      onClick: e => {
+        e.stopPropagation();
+        removeElement(index);
+      },
+      "aria-label": "\u79FB\u9664\u5143\u7D20" }, "\xD7")))))), /*#__PURE__*/
+
+
+
+
+
+
+
+
+
+
+    React.createElement("div", { className: `card ${isBlock2Collapsed ? 'collapsed' : ''}` }, /*#__PURE__*/
+    React.createElement("h2", {
+      className: `section-title ${isBlock2Collapsed ? 'collapsed' : ''}`,
+      onClick: () => setIsBlock2Collapsed(!isBlock2Collapsed) }, "\u5143\u7D20\u653E\u7F6E\u5340", /*#__PURE__*/
+
+
+    React.createElement("span", { className: "arrow" }, isBlock2Collapsed ? '▼' : '▼')), /*#__PURE__*/
+
+    React.createElement("div", { className: "element-placement-area" }, /*#__PURE__*/
+    React.createElement("div", { className: "element-grid" },
+    elementSections.map((section, sectionIndex) => /*#__PURE__*/
+    React.createElement("div", { key: sectionIndex, className: "element-section" }, /*#__PURE__*/
+    React.createElement("h3", { className: "subsection-title" }, /*#__PURE__*/
+    React.createElement("span", { className: "section-icon" }, section.icon),
+    section.title), /*#__PURE__*/
+
+    React.createElement("div", { className: "element-buttons" },
+    section.elements.map(elementKey => {
+      const element = elements[elementKey];
+      return renderElementButton(element, section.title);
+    }))))))), /*#__PURE__*/
+
+
+
+
+
+
+
+
+    React.createElement("div", { className: `card ${isBlock3Collapsed ? 'collapsed' : ''}` }, /*#__PURE__*/
+    React.createElement("h2", {
+      className: "section-title",
+      onClick: () => setIsBlock3Collapsed(!isBlock3Collapsed) }, "\u8B8A\u6578\u5167\u5BB9\u586B\u5BEB\u5340", /*#__PURE__*/
+
+
+    React.createElement("span", { className: "arrow" }, isBlock3Collapsed ? '▶' : '▼')), /*#__PURE__*/
+
+    React.createElement("div", { className: "variable-content-area" },
+    selectedElement ? /*#__PURE__*/
+    React.createElement("div", { className: "variable-editor" }, /*#__PURE__*/
+    React.createElement("h3", { className: "element-content-title" },
+    getTruncatedFirstLine(selectedElement.content)),
+
+    selectedElement.editType === 'select' && /*#__PURE__*/
+    React.createElement("div", { className: "variable-item" }, /*#__PURE__*/
+
+    React.createElement("select", {
+      value: selectedElement.variables[0].value,
+      onChange: e => updateVariable(selectedElement.id, selectedElement.variables[0].name, e.target.value) }, /*#__PURE__*/
+
+    React.createElement("option", { value: "" }, "\u9078\u64C7\u4E00\u500B\u9078\u9805"),
+    selectedElement.options.map((option, optionIndex) => /*#__PURE__*/
+    React.createElement("option", { key: optionIndex, value: option }, option))),
+
+
+    selectedElement.variables[0].value === '自訂義' && /*#__PURE__*/
+    React.createElement("input", {
+      type: "text",
+      value: selectedElement.variables[0].customValue || '',
+      onChange: e => updateVariable(selectedElement.id, selectedElement.variables[0].name, e.target.value, true),
+      placeholder: "\u8ACB\u8F38\u5165\u81EA\u8A02\u9078\u9805" })),
+
+
+
+
+    selectedElement.editType === 'dynamicSelect' &&
+    selectedElement.variables.map((variable, index) => /*#__PURE__*/
+    React.createElement("div", { key: index, className: "variable-item" }, /*#__PURE__*/
+
+    React.createElement("select", {
+      value: variable.value,
+      onChange: e => updateVariable(selectedElement.id, variable.name, e.target.value) }, /*#__PURE__*/
+
+    React.createElement("option", { value: "" }, "\u9078\u64C7\u4E00\u500B\u9078\u9805"),
+    selectedElement.options.map((option, optionIndex) => /*#__PURE__*/
+    React.createElement("option", { key: optionIndex, value: option }, option))),
+
+
+    variable.value === '自訂義' && /*#__PURE__*/
+    React.createElement("input", {
+      type: "text",
+      value: variable.customValue || '',
+      onChange: e => updateVariable(selectedElement.id, variable.name, e.target.value, true),
+      placeholder: "\u8ACB\u8F38\u5165\u81EA\u8A02\u9078\u9805" }))),
+
+
+
+
+
+    selectedElement.editType === 'mixed' &&
+    selectedElement.variables.map((variable, index) => /*#__PURE__*/
+    React.createElement("div", { key: index, className: "variable-item" }, /*#__PURE__*/
+
+    React.createElement("select", {
+      value: variable.value,
+      onChange: e => updateVariable(selectedElement.id, variable.name, e.target.value) }, /*#__PURE__*/
+
+    React.createElement("option", { value: "" }, "\u9078\u64C7\u4E00\u500B\u9078\u9805"),
+    selectedElement.options[variable.name].map((option, optionIndex) => /*#__PURE__*/
+    React.createElement("option", { key: optionIndex, value: option }, option))),
+
+
+    selectedElement.options[variable.name].includes('自訂義') && variable.value === '自訂義' && /*#__PURE__*/
+    React.createElement("input", {
+      type: "text",
+      value: variable.customValue || '',
+      onChange: e => updateVariable(selectedElement.id, variable.name, e.target.value, true),
+      placeholder: "\u8ACB\u8F38\u5165\u81EA\u8A02\u9078\u9805" }))),
+
+
+
+
+
+    selectedElement.editType === 'longText' &&
+    selectedElement.variables.map((variable, index) => /*#__PURE__*/
+    React.createElement("div", { key: index, className: "variable-item" }, /*#__PURE__*/
+
+    React.createElement("textarea", {
+      value: variable.value || '',
+      onChange: e => updateVariable(selectedElement.id, variable.name, e.target.value),
+      placeholder: `請輸入${variable.name}` }))),
+
+
+
+
+    ['步驟列舉', '多角度分析', '比較分析', '多語言回覆', '重點修正列表'].includes(selectedElement.name) && /*#__PURE__*/
+    React.createElement("div", { className: "option-buttons" }, /*#__PURE__*/
+    React.createElement("button", { onClick: () => addOption(selectedElement.id) }, "\u2795"), /*#__PURE__*/
+    React.createElement("button", {
+      onClick: () => removeOption(selectedElement.id),
+      disabled: selectedElement.variables.length <= 1 }, "\u2796"))) : /*#__PURE__*/
+
+
+
+
+
+    React.createElement("p", { className: "no-element-selected" }, "\u8ACB\u5728\u67B6\u69CB\u7DE8\u8F2F\u5340\u9078\u64C7\u4E00\u500B\u5143\u7D20\u4F86\u7DE8\u8F2F\u5176\u8B8A\u6578"))), /*#__PURE__*/
+
+
+
+
+
+    React.createElement("div", { className: "card final-prompt-area" }, /*#__PURE__*/
+    React.createElement("h2", { className: "section-title" }, "\u6700\u7D42\u63D0\u793A\u8A5E\u8F38\u51FA"), /*#__PURE__*/
+    React.createElement("textarea", {
+      value: finalPrompt,
+      readOnly: true,
+      className: "final-prompt" }), /*#__PURE__*/
+
+    React.createElement("div", { className: "button-container" }, /*#__PURE__*/
+    React.createElement("button", {
+      onClick: copyToClipboard,
+      className: copyStatus === '已複製！' ? 'success' : copyStatus === '複製失敗' ? 'error' : '' },
+
+    copyStatus), /*#__PURE__*/
+
+    React.createElement("button", { onClick: resetToDefault, className: "secondary" }, "\u56DE\u5230\u9810\u8A2D\u503C"))),
+
+
+
+
+    isTooltipVisible && /*#__PURE__*/
+    React.createElement("div", {
+      className: "custom-tooltip",
+      style: {
+        position: 'fixed',
+        left: `${tooltipPosition.x + 10}px`,
+        top: `${tooltipPosition.y + 10}px`,
+        zIndex: 9999,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        color: 'white',
+        padding: '5px 10px',
+        borderRadius: '4px',
+        fontSize: '12px',
+        pointerEvents: 'none' } },
+
+
+    tooltipContent), /*#__PURE__*/
+
+
+
+
+    React.createElement("footer", { className: "app-footer" }, /*#__PURE__*/
+    React.createElement("div", { className: "footer-content" }, /*#__PURE__*/
+    React.createElement("p", null, "\xA9 2024 ", /*#__PURE__*/React.createElement("a", { href: "https://erikyin.net/", target: "_blank" }, "\u6BB7\u6148\u9060\u7684\u5B57\u78BC\u4E16\u754C"), ". All rights reserved."), /*#__PURE__*/
+    React.createElement("p", null, "\u53C3\u8003\u8CC7\u8A0A\uFF1A", /*#__PURE__*/React.createElement("a", { href: "https://docs.anthropic.com/zh-TW/docs/prompt-engineering", target: "_blank" }, "\u63D0\u793A\u5DE5\u7A0B - Anthropic")), /*#__PURE__*/
+    React.createElement("p", null, "\u2665 Love it? \u2605 ", /*#__PURE__*/React.createElement("a", { href: "https://erikyin.net/boost/", target: "_blank" }, "Support me!"))))));
+
+
+
+
+
 };
 
 // 渲染 React 組件
