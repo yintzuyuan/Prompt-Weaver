@@ -6,7 +6,7 @@ Prompt-Weaver 是一個創新的提示詞生成工具，旨在幫助用戶掌握
 
 ## 在線預覽
 
-您可以通過以下鏈接在 CodePen 上預覽和體驗 Prompt-Weaver：
+您可以通過以下連結在 CodePen 上預覽和體驗 Prompt-Weaver：
 
 [Prompt-Weaver CodePen 預覽](https://codepen.io/erikyin/pen/mdZbBZq)
 
