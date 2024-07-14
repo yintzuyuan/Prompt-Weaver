@@ -1,0 +1,454 @@
+/* 全局樣式 */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #eeece2;
+  color: #3d3929;
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 卡片樣式 */
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 區塊1: 架構編輯區樣式 */
+.structure-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.structure-element {
+  display: flex;
+  flex: 0 0 auto; /* 不允許元素伸縮 */
+  max-width: 200px; /* 設置最大寬度 */
+  width: 100%; /* 在小屏幕上充滿寬度 */
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.structure-element:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+.structure-element .element-button.structure-button {
+  /* 重置所有可能繼承的樣式 */
+  all: initial;
+  
+  /* 然後設置您想要的具體樣式 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 14px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.structure-element .element-button.structure-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.button-text {
+  flex-grow: 0;
+  overflow: visible;
+  text-overflow: clip;
+  padding-right: 12px;
+}
+
+.remove-button {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.remove-button:hover {
+  color: #ff4d4d;
+  background-color: rgba(255, 77, 77, 0.1);
+}
+
+/* 區塊2: 元素放置區樣式 */
+.element-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.element-section {
+  margin-bottom: 12px;
+}
+
+.subsection-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.section-icon {
+  font-size: 1.2em;
+  margin-right: 8px;
+}
+
+.element-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+.element-buttons button {
+  width: 100%;
+  text-align: left;
+  padding: 6px 8px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s, background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-right: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.element-buttons button:hover:not(:disabled) {
+  transform: translateY(-3px);
+}
+
+.element-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.element-content {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.selected-mark {
+  font-size: 1em;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.element-count {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  line-height: 1;
+  padding-bottom: 0px;
+  margin-left: 8px;
+}
+
+/* 元素類別顏色 */
+.structure-element.task-definition { 
+  border-left: 4px solid #FFD700; 
+  background-color: #FFFACD;
+}
+.structure-element.content-input { 
+  border-left: 4px solid #90EE90; 
+  background-color: #F0FFF0;
+}
+.structure-element.thought-control { 
+  border-left: 4px solid #87CEFA; 
+  background-color: #F0F8FF;
+}
+.structure-element.output-control { 
+  border-left: 4px solid #FFA07A; 
+  background-color: #FFF5EE;
+}
+.structure-element.custom { 
+  border-left: 4px solid #DDA0DD; 
+  background-color: #FFF0FF;
+}
+
+.element-buttons button.task-definition { background-color: #FFD700; }
+.element-buttons button.content-input { background-color: #90EE90; }
+.element-buttons button.thought-control { background-color: #87CEFA; }
+.element-buttons button.output-control { background-color: #FFA07A; }
+.element-buttons button.custom { background-color: #DDA0DD; }
+
+/* 區塊3: 變數內容填寫區樣式 */
+.variable-editor {
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.element-content-title {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #da7756;
+  font-size: 16px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.variable-item {
+  margin-bottom: 12px;
+}
+
+.variable-item label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.variable-item select,
+.variable-item input,
+.variable-item textarea {
+  width: 97%;
+  min-height: 20px;
+  max-height: 300px;
+  resize: vertical;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.option-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.no-element-selected {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* 區塊4: 最終提示詞輸出區域樣式 */
+.final-prompt {
+  width: 97%;
+  min-height: 100px;
+  max-height: 400px;
+  resize: vertical;
+}
+
+/* 通用元素樣式 */
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #da7756;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+
+.section-title .arrow {
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.section-title.collapsed .arrow {
+  transform: rotate(-90deg);
+}
+
+.structure-area,
+.element-placement-area,
+.variable-content-area,
+.final-prompt-area {
+  max-height: 1000px; /* 或者更大的值，確保能容納所有內容 */
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.collapsed .structure-area,
+.collapsed .element-placement-area,
+.collapsed .variable-content-area,
+.collapsed .final-prompt-area {
+  max-height: 0;
+  opacity: 0;
+}
+
+textarea, input, select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+textarea:focus, input:focus, select:focus {
+  border-color: #da7756;
+  outline: none;
+}
+
+button {
+  background-color: #da7756;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #c56a4a;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.structure-element .element-button.structure-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333; /* 保持原有的文字顏色 */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* 響應式設計 */
+@media (min-width: 768px) {
+  .element-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .element-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .element-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1204px) {
+  .element-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .structure-element {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  .card {
+    padding: 15px;
+  }
+  .button-container {
+    flex-direction: column;
+  }
+  .button-container button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .structure-element {
+    flex: 0 0 100%; /* 在小屏幕上每行一個 */
+    max-width: 100%;
+  }
+  .structure-element .element-button.structure-button {
+    flex: 0 5 100%; /* 在小屏幕上每行一個 */
+    max-width: 100%;
+  }
+}
+
+/* 頁尾 */
+.app-footer {
+  margin-top: 20px;
+  padding: 20px 0;
+/*   background-color: #f5f5f5; */
+/*   border-top: 1px solid #e0e0e0; */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.footer-content p {
+  margin: 5px 0;
+}
+
+.footer-content a {
+  color: #666;
+  text-decoration: none;
+}
+
+.footer-content a:hover {
+  text-decoration: underline;
+}
