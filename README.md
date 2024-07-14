@@ -4,6 +4,12 @@
 
 Prompt-Weaver 是一個創新的提示詞生成工具，旨在幫助用戶掌握與 AI 大語言模型（如 GPT-3、GPT-4 或 Claude）有效溝通的藝術。這個工具不僅提供現成的提示詞，更重要的是教會您如何編織出精妙的 AI 提示。
 
+## 在線預覽
+
+您可以通過以下鏈接在 CodePen 上預覽和體驗 Prompt-Weaver：
+
+[Prompt-Weaver CodePen 預覽](https://codepen.io/erikyin/pen/mdZbBZq)
+
 ## 主要特性
 
 - 直觀的拖放界面，用於組織提示元素
